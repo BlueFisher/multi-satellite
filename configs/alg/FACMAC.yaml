@@ -1,0 +1,42 @@
+action_min: -1
+action_max: 1
+noise_clip: 0.1
+policy_noise: 0.1
+
+alg_name: FACMAC        # 算法名称
+description: "FACMAC"  # 实验描述
+continuous: true     # 环境动作是否连续
+seed: 8              # 随机种子
+n_episodes:  50000     # 训练回合数
+save_interval: 100    # 多少回合保存一次模型
+log_interval: 100      # 多少回合记录一次奖励
+eval_interval: 1000   # 多少回合评估一次
+eval_episode: 5     # 评估多少回合
+max_episode_steps: 1000  # 每回合最大步长
+use_cuda: true         # 是否使用 CUDA
+use_tensorboard: true       # 是否使用 tensorboard
+logdir: output/logs/        # 保存日志的文件夹
+models_dir: output/models  # 保存模型的文件夹
+load_model: false # false           # 是否加载模型
+load_path: # output/modles/SatelliteEnv2v2/MATD3/Collision3-20250907-234248/episode_10000 # output/modles/episode_17700
+train_after_episode: true # 回合结束后训练还是每一步训练一次
+render: false #false         # 是否需要显示界面
+just_eval: false #false      # 是否只评估模型, load_model 必须为 true
+num_envs: 16
+agent_heuristic: false
+opponent_heuristic: true
+
+# 超参数
+gamma: 0.97            # 折扣因子
+tau: 0.05            # 目标网络软更新系数
+lr_actor: 0.3e-3       # Actor学习率
+lr_critic: 0.3e-2      # Critic学习率
+batch_size: 16          # 采样大小
+buffer_size: 1000000        # 经验池大小
+hidden_size: 128       # 网络隐藏层大小
+norm_grad: 40       # 梯度裁剪的大小
+
+mixer: "qmixer"
+hyper_dim: 64
+mixer_dim: 32
+use_agent_id: true

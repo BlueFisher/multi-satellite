@@ -1,0 +1,74 @@
+scenario_name: "2v2  interception Mission with Randomized LEO Satellites"
+#明确指定LVLH坐标系的原点是哪个卫星分组
+lvlh_origin_prefix: "高价值目标"
+
+interceptor_prefix : &interceptor_prefix  "拦截者"
+attacker_prefix: &attacker_prefix "攻击者"
+hvt_name: "高价值目标_0"
+orbit_min: 7400
+orbit_max: 7600
+# ===== 新增：观测距离阈值配置 =====
+observation_threshold_km: 50  # 我方卫星与敌方卫星的最大观测距离
+satellite_groups:
+  # 1个高价值目标卫星，由预设规则控制
+  - group_name: "hvt"
+    prefix: "高价值目标"
+    count: 1
+    generation_mode: "absolute"
+    color: "yellow"
+    # 使用状态向量进行随机化
+    # 注意：这里的范围仍然是轨道根数的范围。代码会自动将其转换为有效的状态向量。
+    init_type: "classical"
+    mass_range: [ 500.0, 1000.0 ]
+    direction_of_generation: -1 # 1表示其他卫星生成在HVT前方，-1表示其他卫星生成在HVT后方
+    ranges:
+      a: [42160, 42170]
+      ecc: [ 0.0, 0.00 ] # 偏心率
+      inc: [ 0, 180 ] # 轨道倾角 (deg)
+      raan: [ -180, 180 ] # 升交点赤经 (deg)
+      argp: [ -180, 180 ] # 近地点幅角 (deg)
+      nu: [ -180, 180 ] # 真近点角 (deg)
+
+    # 2个蓝方进攻者，由预设规则控制
+  - group_name: "attackers"
+    prefix: *attacker_prefix
+    count: 2
+    # 新增: 生成模式 relative_to_origin相对于LVLH原点来生成。
+    generation_mode: "relative_to_hvt"
+    mass_range: [500.0, 1000.0]
+    color: "blue"
+    # 初始相对速度扰动 (km/s)
+    relative_velocity_perturbation_km_s: [-0.005, 0.005]
+    # 新增：同伴间的最小安全距离，防止初始时靠得太近
+    min_peer_separation_km: 1.0
+    # 极坐标参数
+    polar_rho_range_km: [ 22, 30 ]  # ρ∈[25km, 35km]
+    polar_theta_range_deg: [ 0, 360 ]  # θ∈[0°, 360°]
+    init_type: "vector"
+
+  # 2个红方守卫者，由预设规则控制
+  - group_name: "interceptors"
+    prefix: *interceptor_prefix
+    count: 2
+    # 生成模式选择: "natural_ellipse" 或 "formation_flying"
+    generation_mode: "natural_ellipse"  # 自然椭圆绕飞模式
+    # generation_mode: "formation_flying"  # 伴飞模式（备选）
+    init_type: "vector"
+    mass_range: [500.0, 1000.0]
+    color: "red"
+    min_peer_separation_km: 1.0
+
+    # ===== 模式1: 自然椭圆绕飞参数 =====
+    ellipse_b_range_km: [ 8, 12 ]  # 椭圆短半轴范围 b
+    # 椭圆长半轴 a = 2*b (自动计算)
+    # 相位角范围（度），用于确定卫星在椭圆上的位置
+    ellipse_phase_range_deg: [ 0, 360 ]
+    # 可选：指定每个卫星的相位角（如果不指定则随机生成）
+    ellipse_phases_deg: null  # 例如: [0, 120, 240] 均匀分布
+
+    # ===== 模式2: 伴飞模式参数 =====
+    # 沿着HVT运动方向伴飞，3颗卫星排成一列
+    formation_distance_range_km: [5, 25]
+    # 速度方向与HVT保持一致 完全伴飞，无速度扰动
+    relative_velocity_perturbation_km_s: [ 0.0, 0.0 ]
+    formation_angle_range_deg: [0, 360]      # 新增：角度范围（在R-T平面）

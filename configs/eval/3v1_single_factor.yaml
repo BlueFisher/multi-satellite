@@ -1,0 +1,30 @@
+model:
+  env_name: SatelliteEnv3v1Hvt
+  alg_name: SharedMessageMATD3
+  load_path: output/models/SatelliteEnv3v1HvtNoPlaneLimitAccel
+  obs_add_distance: false
+  on_plane: false
+  limit_accel: true
+
+factors:
+  capture_duration:
+    parameter: capture_sustain_steps
+    values: [100, 200, 300, 400]
+  attacker_accel:
+    parameter: attacker_max_accel
+    values: [0.4, 0.6, 0.8, 1.0, 1.2]
+  collision_threshold:
+    parameter: collision_threshold
+    values: [0.05, 0.1, 0.5, 1.0]
+  capture_radius:
+    parameter: capture_distance_threshold_km
+    values: [10, 12.5, 15, 17.5, 20]
+  hvt_safe_distance:
+    parameter: hvt_safe_distance
+    values: [2.5, 5, 7.5, 10]
+  outside_threshold:
+    parameter: outside_threshold
+    values: [40, 50, 60, 75]
+  attacker_initial_distance:
+    parameter: attacker_initial_rho_range_km
+    values: [[18, 22], [22, 26], [26, 30], [30, 35]]

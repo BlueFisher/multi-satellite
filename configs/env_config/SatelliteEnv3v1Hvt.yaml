@@ -1,0 +1,23 @@
+use_diff_obs: True
+reward_side: False
+reward_min_accel: False
+obs_window_size: 2
+action_window_size: 1
+obs_add_distance: True
+capture_sustain_steps: 400
+
+reward_computer_type: "RewardComputer3v1"
+outside_threshold: 50 # 博弈 距离 50km
+capture_distance_threshold_km:  15.0  # 围捕距离 15km
+attacker_max_accel: 0.83 # 对手 / 我方 速度增量比
+hvt_safe_distance: 5.0 # hvt 安全距离 5km
+update_interval: 2
+collision_threshold: 0.1
+m_max_episode_steps: 1000
+action_scale: 0.001
+task_type: "3v1"
+
+env_name: "SatelliteEnv3v1Hvt"
+obs_compatible: False
+on_plane: True
+limit_accel: False

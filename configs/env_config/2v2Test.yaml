@@ -1,0 +1,19 @@
+intercept_time: 40    # 拦截维持所需时间
+intercept_distance_threshold_km: 15.0   # 拦截阈值
+win_max_angle: 30.0   # 拦截成功最大夹角
+
+task_type: 2v2
+update_interval: 2
+collision_threshold: 0.1
+action_scale: 0.001
+m_max_episode_steps: 2000
+
+outside_threshold: 75 # 博弈 距离 50km
+attacker_max_accel: 0.83 # 对手 / 我方 速度增量比
+hvt_safe_distance: 5.0 # hvt 安全距离 5km
+reward_computer_type: "RewardComputer2v2"
+env_name: SatelliteEnv2v2 # 这里指向的是原始的环境
+on_plane: False
+
+obs_add_last_action: True
+limit_accel: True

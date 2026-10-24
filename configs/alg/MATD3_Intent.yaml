@@ -1,0 +1,42 @@
+action_min: -1
+action_max: 1
+noise_clip: 0.1
+policy_noise: 0.1
+
+use_priority: False
+priority_alpha: 0.6  # 优先级权重（0表示均匀采样，1表示完全按优先级）
+priority_beta_start: 0.4  # 重要性采样初始权重
+priority_beta_end: 1.0    # 重要性采样最终权重
+priority_beta_frames: 100000  # beta从start到end的衰减步数
+
+alg_name: MATD3_Intent        # 算法名称
+description: "MATD3_Intent"
+continuous: true     # 环境动作是否连续
+seed: 8              # 随机种子
+n_episodes:  1000000     # 训练回合数
+save_interval: 100    # 多少回合保存一次模型
+log_interval: 100      # 多少回合记录一次奖励
+eval_interval: 1000   # 多少回合评估一次
+eval_episode: 5      # 评估多少回合
+max_episode_steps: 1000  # 每回合最大步长
+use_cuda: true         # 是否使用 CUDA
+use_tensorboard: true       # 是否使用 tensorboard
+logdir: output/logs/        # 保存日志的文件夹
+models_dir: output/models  # 保存模型的文件夹
+load_model: false          # 是否加载模型
+load_path: # output/modles/SatelliteEnv2v2/MATD3/Collision3-20250907-234248/episode_10000 # output/modles/episode_17700
+train_after_episode: false    # 回合结束后训练还是每一步训练一次
+render: false                 # 是否需要显示界面
+just_eval: false              # 是否只评估模型, load_model 必须为 true
+num_envs: 16
+
+# 超参数
+gamma: 0.97            # 折扣因子
+tau: 0.05            # 目标网络软更新系数
+lr_actor: 0.3e-3       # Actor学习率
+lr_critic: 0.3e-2      # Critic学习率
+batch_size: 32          # 采样大小
+buffer_size: 1000000        # 经验池大小
+hidden_size: 128       # 网络隐藏层大小
+norm_grad: 40       # 梯度裁剪的大小
+kl_coef: 0.01

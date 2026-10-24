@@ -1,0 +1,52 @@
+attacker_prefix: attacker
+interceptor_prefix: interceptor
+hvt_name: HVT_0
+is_harbin: true
+config_name: 测试1039
+task_type: 3v1
+satellites:
+- group: HVT
+  init_type: classic
+  init_data:
+  - 7499.672
+  - 1.391195E-16
+  - 103.3801
+  - 258.6253
+  - 0
+  - -160.6474
+- group: attacker
+  init_type: classic
+  init_data:
+  - 7533.273
+  - 0.001636541
+  - 103.3801
+  - 258.6253
+  - 215.4364
+  - -16.03322
+- group: interceptor
+  init_type: classic
+  init_data:
+  - 7522.432
+  - 0.004655098
+  - 103.3801
+  - 258.6253
+  - 212.9483
+  - -13.63743
+- group: interceptor
+  init_type: classic
+  init_data:
+  - 7512.93
+  - 0.004646875
+  - 103.3801
+  - 258.6253
+  - 254.7356
+  - -55.5289
+- group: interceptor
+  init_type: classic
+  init_data:
+  - 7481.387
+  - 0.004632211
+  - 103.3801
+  - 258.6253
+  - 341.8813
+  - -142.6364

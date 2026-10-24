@@ -1,0 +1,45 @@
+# 实验设置
+exp_name: Collision3          # 实验名称
+alg_name: MATD3BC        # 算法名称
+env_name: SatelliteEnv3v1Hvt
+continuous: true              # 环境动作是否连续
+seed: 8                       # 随机种子
+n_episodes:  50000            # 训练回合数
+save_interval: 100            # 多少回合保存一次模型
+log_interval: 100             # 多少回合记录一次奖励
+eval_interval: 1000           # 多少回合评估一次
+eval_episode: 5               # 评估多少回合
+max_episode_steps: 1000       # 每回合最大步长
+use_cuda: true                # 是否使用 CUDA
+debug_mode: true             # debug 模式不输出 tensorboard 和保存模型
+use_tensorboard: true         # 是否使用 tensorboard
+logdir: output/logs/          # 保存日志的文件夹
+models_dir: output/models     # 保存模型的文件夹
+load_model: false             # 是否加载模型
+load_path:
+train_after_episode: false    # 回合结束后训练还是每一步训练一次
+render: false                 # 是否需要显示界面
+just_eval: false              # 是否只评估模型, load_model 必须为 true
+num_envs: 16
+
+update_interval: 2.0          # 土豆推演的时间
+action_scale: 0.001           # 土豆力缩放的大小, 使用CW 方程时这个值为速度增量, 大小为 0.1 ~ 0.5 m/s
+agent_heuristic: false
+opponent_heuristic: true
+collision_threshold: 0.1
+capture_sustain_steps: 400
+on_plane: true
+
+generate_image: false
+origin_satellite: HVT_0
+image_dir: output/image/
+
+# 超参数
+gamma: 0.97                   # 折扣因子
+tau: 0.05                     # 目标网络软更新系数
+lr_actor: 0.3e-3              # Actor学习率
+lr_critic: 0.3e-2             # Critic学习率
+batch_size: 32                # 采样大小
+buffer_size: 1000000          # 经验池大小
+hidden_size: 128              # 网络隐藏层大小
+norm_grad: 40                 # 梯度裁剪的大小

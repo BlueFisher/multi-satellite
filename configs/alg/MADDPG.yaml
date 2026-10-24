@@ -1,0 +1,31 @@
+alg_name: MADDPG
+description: "MADDPG"
+action_min: -1
+action_max: 1
+continuous: true
+seed: 8
+n_episodes: 50000
+save_interval: 100
+log_interval: 100
+eval_interval: 1000
+eval_episode: 5
+max_episode_steps: 1000
+use_cuda: true
+use_tensorboard: true
+logdir: output/logs/
+models_dir: output/models
+load_model: false
+load_path:
+train_after_episode: false
+render: false
+just_eval: false
+num_envs: 16
+
+gamma: 0.97
+tau: 0.05
+lr_actor: 0.3e-3
+lr_critic: 0.3e-2
+batch_size: 32
+buffer_size: 1000000
+hidden_size: 128
+norm_grad: 40

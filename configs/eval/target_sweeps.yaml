@@ -1,0 +1,78 @@
+models:
+  2v2_plane_matd3:
+    environment: SatelliteEnv2v2
+    arguments:
+      env_name: SatelliteEnv2v2
+      alg_name: MATD3
+      load_path: output/models/SatelliteEnv2v2/MATD3
+      obs_add_last_action: false
+      on_plane: true
+      limit_accel: false
+
+  2v2_noplane_matd3:
+    environment: SatelliteEnv2v2
+    arguments:
+      env_name: SatelliteEnv2v2
+      alg_name: MATD3
+      load_path: output/models/SatelliteEnv2v2NoPlane/MATD3
+      obs_add_last_action: false
+      on_plane: false
+      limit_accel: false
+
+  2v2_limited_facmac:
+    environment: SatelliteEnv2v2
+    arguments:
+      env_name: SatelliteEnv2v2
+      alg_name: FACMAC
+      load_path: output/models/SatelliteEnv2v2NoPlaneLimitAccel/FACMAC
+      obs_add_last_action: true
+      on_plane: false
+      limit_accel: true
+
+  3v1_plane_intent:
+    environment: SatelliteEnv3v1Hvt
+    arguments:
+      env_name: SatelliteEnv3v1Hvt
+      alg_name: MATD3_Intent
+      load_path: output/models/SatelliteEnv3v1Hvt/MATD3_Intent
+      obs_add_distance: true
+      on_plane: true
+      limit_accel: false
+
+  3v1_noplane_intent:
+    environment: SatelliteEnv3v1Hvt
+    arguments:
+      env_name: SatelliteEnv3v1Hvt
+      alg_name: MATD3_Intent
+      load_path: output/models/SatelliteEnv3v1HvtNoPlane/MATD3_Intent
+      obs_add_distance: true
+      on_plane: false
+      limit_accel: false
+
+  3v1_limited_shared:
+    environment: SatelliteEnv3v1Hvt
+    arguments:
+      env_name: SatelliteEnv3v1Hvt
+      alg_name: SharedMessageMATD3
+      load_path: output/models/SatelliteEnv3v1HvtNoPlaneLimitAccel/SharedMessageMATD3
+      obs_add_distance: false
+      on_plane: false
+      limit_accel: true
+
+scans:
+  position:
+    SatelliteEnv2v2:
+      angles_deg: [30, 60, 90, 120, 150, 180]
+      radii_km: [20, 25, 30, 35]
+    SatelliteEnv3v1Hvt:
+      angles_deg: [30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360]
+      radii_km: [20, 25, 30, 35, 40, 45, 50]
+
+  fine_position:
+    SatelliteEnv3v1Hvt:
+      angles_deg: [80, 82, 84, 86, 88, 90, 92, 94, 96, 98]
+      radii_km: [24, 25, 26, 27]
+
+  accel: [0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+  collision: [0, 0.5, 1.0, 1.5]
+  duration: [10, 50, 100, 200, 300, 400, 500, 600]

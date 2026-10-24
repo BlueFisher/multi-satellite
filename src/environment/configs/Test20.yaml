@@ -1,0 +1,48 @@
+scenario_name: "Test20"
+lvlh_origin_prefix: "高价值目标"
+interceptor_prefix: "拦截者"
+attacker_prefix: "攻击者"
+hvt_name: "高价值目标_0"
+attacker_name: "攻击者_0"
+orbit_min: 42160
+orbit_max: 42170
+observation_threshold_km: 50
+satellite_groups:
+- group_name: "hvt"
+  prefix: "高价值目标"
+  count: 1
+  generation_mode: "absolute"
+  color: "yellow"
+  init_type: "classical"
+  mass_range: [500, 1000]
+  ranges:
+    a: [42160, 42170]
+    ecc: [0, 0]
+    inc: [0, 180]
+    raan: [-180, 180]
+    argp: [-180, 180]
+    nu: [-180, 180]
+- group_name: "attackers"
+  prefix: "攻击者"
+  count: 17
+  generation_mode: "relative_to_hvt"
+  color: "blue"
+  init_type: "vector"
+  mass_range: [500, 1000]
+  relative_velocity_perturbation_km_s: [-0.01, 0.01]
+  polar_rho_range_km: [22, 30]
+  polar_theta_range_deg: [0, 360]
+  min_peer_separation_km: 5
+- group_name: "interceptors"
+  prefix: "拦截者"
+  count: 3
+  generation_mode: "natural_ellipse"
+  color: "red"
+  init_type: "vector"
+  mass_range: [500, 1000]
+  relative_attacker_distance_range_km: [10, 20]
+  min_hvt_distance_km: 10
+  min_interceptor_separation_km: 1
+  ellipse_b_range_km: [8, 12]
+  ellipse_phase_range_deg: [0, 360]
+  ellipse_phases_deg: null
